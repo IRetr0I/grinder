@@ -71,10 +71,10 @@ struct AimBot {
     }
 
     void assignTarget() {
-        for (int i = 0;i < players->size();i++) {
+        for (int i = 0;i < dummy->size();i++) {
             Player* p = players->at(i);
             if (!p->isCombatReady())continue;
-            if (!p->enemy) continue;
+            //if (!p->enemy) continue;
             if (!p->visible) continue;
             if (p->aimedAt) continue;
             if (fabs(p->aimbotDesiredAnglesIncrement.x) > cl->AIMBOT_FOV) continue;
@@ -93,7 +93,7 @@ struct AimBot {
     }
 
     void resetLockFlag() {
-        for (int i = 0;i < players->size();i++) {
+        for (int i = 0;i < dummy->size();i++) {
             Player* p = players->at(i);
             if (!p->isCombatReady()) continue;
             p->aimbotLocked = false;
