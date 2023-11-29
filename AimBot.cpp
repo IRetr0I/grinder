@@ -71,7 +71,7 @@ struct AimBot {
     }
 
     void assignTarget() {
-        for (int i = 0;i < dummy->size();i++) {
+        for (int i = 0;i < dummie->size();i++) {
             Player* p = players->at(i);
             if (!p->isCombatReady())continue;
             //if (!p->enemy) continue;
@@ -93,7 +93,7 @@ struct AimBot {
     }
 
     void resetLockFlag() {
-        for (int i = 0;i < dummy->size();i++) {
+        for (int i = 0;i < dummie->size();i++) {
             Player* p = players->at(i);
             if (!p->isCombatReady()) continue;
             p->aimbotLocked = false;
