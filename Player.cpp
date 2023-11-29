@@ -113,7 +113,7 @@ struct Player {
         if (!isValid())return false;
         if (isDummie()) return true;
         if (dead) return false;
-        if (knocked) return false;
+        if (knocked) return true;
         return true;
     }
 
