@@ -47,7 +47,7 @@ struct LocalPlayer {
     bool isCombatReady() {
         if (base == 0) return false;
         if (dead) return false;
-        if (knocked) return false;
+        if (knocked) return true;
         return true;
     }
 
