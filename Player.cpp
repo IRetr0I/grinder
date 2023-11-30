@@ -74,10 +74,11 @@ struct Player {
         if (myLocalPlayer->isValid()) {
             local = myLocalPlayer->base == base;
             bool nonBR = false; //figure out later how to get game mode
-            friendly = (nonBR)
-                ? (myLocalPlayer->teamNumber % 2 == 0 && teamNumber % 2 == 0) || (myLocalPlayer->teamNumber % 2 != 0 && teamNumber % 2 != 0)
-                : myLocalPlayer->teamNumber == teamNumber;
-            enemy = !friendly;
+            //friendly = (nonBR)
+            //    ? (myLocalPlayer->teamNumber % 2 == 0 && teamNumber % 2 == 0) || (myLocalPlayer->teamNumber % 2 != 0 && teamNumber % 2 != 0)
+            //    : myLocalPlayer->teamNumber == teamNumber;
+            enemy = myLocalPlayer->teamNumber < 0 || myLocalPlayer->teamNumber>50 || myLocalPlayer->teamNumber == teamNumber;
+            //enemy = !friendly;
             distanceToLocalPlayer = myLocalPlayer->localOrigin.distance(localOrigin);
             distance2DToLocalPlayer = myLocalPlayer->localOrigin.to2D().distance(localOrigin.to2D());
             if (visible) {
