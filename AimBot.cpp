@@ -63,7 +63,7 @@ struct AimBot {
         bool activatedByADSAndIsADSing = cl->AIMBOT_ACTIVATED_BY_ADS && localPlayer->inZoom;
         bool activatedByButtonAndButtonIsDown = cl->AIMBOT_ACTIVATED_BY_BUTTON != "" && display->keyDown(cl->AIMBOT_ACTIVATED_BY_BUTTON);
         bool active = aimbotIsOn
-            && combatReady
+            //&& combatReady
             && (activatedByAttackingAndIsAttacking
                 || activatedByADSAndIsADSing
                 || activatedByButtonAndButtonIsDown);
@@ -73,8 +73,8 @@ struct AimBot {
     void assignTarget() {
         for (int i = 0;i < players->size();i++) {
             Player* p = players->at(i);
-            if (!p->isCombatReady())continue;
-            if (!p->enemy) continue;
+            //if (!p->isCombatReady())continue;
+            //if (!p->enemy) continue;
             if (!p->visible) continue;
             if (p->aimedAt) continue;
             if (fabs(p->aimbotDesiredAnglesIncrement.x) > cl->AIMBOT_FOV) continue;
@@ -95,7 +95,7 @@ struct AimBot {
     void resetLockFlag() {
         for (int i = 0;i < players->size();i++) {
             Player* p = players->at(i);
-            if (!p->isCombatReady()) continue;
+            //if (!p->isCombatReady()) continue;
             p->aimbotLocked = false;
         }
         if (target != nullptr)
