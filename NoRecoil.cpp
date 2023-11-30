@@ -16,7 +16,7 @@ struct NoRecoil {
 
     void controlWeapon(int counter) {
         if (!cl->FEATURE_NORECOIL_ON)return;
-        if (!localPlayer->isCombatReady()) return;
+        //if (!localPlayer->isCombatReady()) return;
         if (!localPlayer->inAttack) return;
         FloatVector2D punchAnglesDiff = localPlayer->punchAnglesDiff;
         if (punchAnglesDiff.isZeroVector()) return;
