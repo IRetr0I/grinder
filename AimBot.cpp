@@ -1,13 +1,13 @@
 #pragma once
 struct AimBot {
     ConfigLoader* cl;
-    MyDisplay* display;
+    XDisplay* display;
     Level* level;
     LocalPlayer* localPlayer;
     std::vector<Player*>* players;
     Player* target = nullptr;
 
-    AimBot(ConfigLoader* cl, MyDisplay* display, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* players) {
+    AimBot(ConfigLoader* cl, XDisplay* display, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* players) {
         this->cl = cl;
         this->display = display;
         this->level = level;
@@ -29,12 +29,12 @@ struct AimBot {
         //calculate smoothing    
         float EXTRA_SMOOTH = cl->AIMBOT_SMOOTH_EXTRA_BY_DISTANCE / target->distanceToLocalPlayer;
         float TOTAL_SMOOTH = cl->AIMBOT_SMOOTH + EXTRA_SMOOTH;
-        //No recoil calcs
-        const FloatVector2D punchAnglesDiff = localPlayer->punchAnglesDiff
-            .multiply(100)
-            .divide(TOTAL_SMOOTH);
-        const double nrPitchIncrement = punchAnglesDiff.x;
-        const double nrYawIncrement = -punchAnglesDiff.y;
+        // //No recoil calcs
+        // const FloatVector2D punchAnglesDiff = localPlayer->punchAnglesDiff
+        //     .multiply(100)
+        //     .divide(TOTAL_SMOOTH);
+        // const double nrPitchIncrement = punchAnglesDiff.x;
+        // const double nrYawIncrement = -punchAnglesDiff.y;
         //Aimbot calcs
         const FloatVector2D aimbotDelta = target->aimbotDesiredAnglesIncrement
             .multiply(100)
@@ -43,8 +43,8 @@ struct AimBot {
         const double aimYawIncrement = aimbotDelta.y * -1;
         const double aimPitchIncrement = aimbotDelta.x;
         //combine
-        const double totalPitchIncrement = aimPitchIncrement + nrPitchIncrement;
-        const double totalYawIncrement = aimYawIncrement + nrYawIncrement;
+        const double totalPitchIncrement = aimPitchIncrement;// + nrPitchIncrement;
+        const double totalYawIncrement = aimYawIncrement;// + nrYawIncrement;
         //turn into integers
         int totalPitchIncrementInt = roundHalfEven(atLeast_1_AwayFromZero(totalPitchIncrement));
         int totalYawIncrementInt = roundHalfEven(atLeast_1_AwayFromZero(totalYawIncrement));
@@ -74,7 +74,7 @@ struct AimBot {
         for (int i = 0;i < players->size();i++) {
             Player* p = players->at(i);
             if (!p->isCombatReady())continue;
-            //if (!p->enemy) continue;
+            if (!p->enemy) continue;
             if (!p->visible) continue;
             if (p->aimedAt) continue;
             if (fabs(p->aimbotDesiredAnglesIncrement.x) > cl->AIMBOT_FOV) continue;

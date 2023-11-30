@@ -12,14 +12,16 @@ struct ConfigLoader {
     bool FEATURE_AIMBOT_ON = true;
     bool FEATURE_SENSE_ON = true;
     bool FEATURE_TRIGGERBOT_ON = true;
-    bool FEATURE_MAP_RADAR_ON = true;
-    bool FEATURE_SPECTATOR_ON = true;
+    bool FEATURE_NORECOIL_ON = true;
+
+    //norecoil    
+    int NORECOIL_PITCH_REDUCTION = 15;
+    int NORECOIL_YAW_REDUCTION = 17;
 
     //aimbot
     bool AIMBOT_ACTIVATED_BY_ATTACK = true;
     bool AIMBOT_ACTIVATED_BY_ADS = false;
     std::string AIMBOT_ACTIVATED_BY_BUTTON = "XK_Shift_L";
-    std::string FEATURE_MAP_RADAR_BUTTON = "XK_Delete";
     int AIMBOT_SMOOTH = 20;
     int AIMBOT_SMOOTH_EXTRA_BY_DISTANCE = 1000;
     float AIMBOT_FOV = 5.0000;
@@ -56,6 +58,12 @@ struct ConfigLoader {
         FEATURE_AIMBOT_ON = (key.compare("FEATURE_AIMBOT_ON") != 0) ? FEATURE_AIMBOT_ON : toBool(val);
         FEATURE_SENSE_ON = (key.compare("FEATURE_SENSE_ON") != 0) ? FEATURE_SENSE_ON : toBool(val);
         FEATURE_TRIGGERBOT_ON = (key.compare("FEATURE_TRIGGERBOT_ON") != 0) ? FEATURE_TRIGGERBOT_ON : toBool(val);
+        FEATURE_NORECOIL_ON = (key.compare("FEATURE_NORECOIL_ON") != 0) ? FEATURE_NORECOIL_ON : toBool(val);
+
+        //norecoil        
+        NORECOIL_PITCH_REDUCTION = (key.compare("NORECOIL_PITCH_REDUCTION") != 0) ? NORECOIL_PITCH_REDUCTION : stoi(val);
+        NORECOIL_YAW_REDUCTION = (key.compare("NORECOIL_YAW_REDUCTION") != 0) ? NORECOIL_YAW_REDUCTION : stoi(val);
+
         //aimbot
         AIMBOT_ACTIVATED_BY_ATTACK = (key.compare("AIMBOT_ACTIVATED_BY_ATTACK") != 0) ? AIMBOT_ACTIVATED_BY_ATTACK : toBool(val);
         AIMBOT_ACTIVATED_BY_ADS = (key.compare("AIMBOT_ACTIVATED_BY_ADS") != 0) ? AIMBOT_ACTIVATED_BY_ADS : toBool(val);
@@ -88,18 +96,23 @@ struct ConfigLoader {
         SENSE_ENEMY_LOCKEDON_BODY_STYLE = (key.compare("SENSE_ENEMY_LOCKEDON_BODY_STYLE") != 0) ? SENSE_ENEMY_LOCKEDON_BODY_STYLE : stoi(val);
         SENSE_ENEMY_LOCKEDON_BORDER_STYLE = (key.compare("SENSE_ENEMY_LOCKEDON_BORDER_STYLE") != 0) ? SENSE_ENEMY_LOCKEDON_BORDER_STYLE : stoi(val);
         SENSE_ENEMY_LOCKEDON_BORDER_WIDTH = (key.compare("SENSE_ENEMY_LOCKEDON_BORDER_WIDTH") != 0) ? SENSE_ENEMY_LOCKEDON_BORDER_WIDTH : stoi(val);
-
-        FEATURE_MAP_RADAR_ON = (key.compare("FEATURE_MAP_RADAR_ON") != 0) ? FEATURE_MAP_RADAR_ON : toBool(val); 
-        FEATURE_MAP_RADAR_BUTTON = (key.compare("FEATURE_MAP_RADAR_BUTTON") != 0) ? FEATURE_MAP_RADAR_BUTTON : trimConstructive(val);
     }
 
     void print() {
         printf("\n==================== GRINDER SETTINGS LOADED ========================\n");
+
         //features
         printf("FEATURE_AIMBOT_ON\t\t\t\t\t%s\n", FEATURE_AIMBOT_ON ? "YES" : "NO");
         printf("FEATURE_SENSE_ON\t\t\t\t\t%s\n", FEATURE_SENSE_ON ? "YES" : "NO");
         printf("FEATURE_TRIGGERBOT_ON\t\t\t\t\t%s\n", FEATURE_TRIGGERBOT_ON ? "YES" : "NO");
+        printf("FEATURE_NORECOIL_ON\t\t\t\t\t%s\n", FEATURE_NORECOIL_ON ? "YES" : "NO");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+        //norecoil
+        printf("NORECOIL_PITCH_REDUCTION\t\t\t\t%d\n", NORECOIL_PITCH_REDUCTION);
+        printf("NORECOIL_YAW_REDUCTION\t\t\t\t\t%d\n", NORECOIL_YAW_REDUCTION);
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
         //aimbot
         printf("AIMBOT_ACTIVATED_BY_ATTACK\t\t\t\t%s\n", AIMBOT_ACTIVATED_BY_ATTACK ? "YES" : "NO");
         printf("AIMBOT_ACTIVATED_BY_ADS\t\t\t\t\t%s\n", AIMBOT_ACTIVATED_BY_ADS ? "YES" : "NO");
@@ -109,6 +122,7 @@ struct ConfigLoader {
         printf("AIMBOT_FOV\t\t\t\t\t\t%.4f\n", AIMBOT_FOV);
         printf("AIMBOT_DEADZONE\t\t\t\t\t\t%.4f\n", AIMBOT_DEADZONE);
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
         //sense        
         printf("SENSE_ENEMY_COLOR_SHIELD_BASED\t\t\t\t%s\n", SENSE_ENEMY_COLOR_SHIELD_BASED ? "YES" : "NO");
         printf("SENSE_ENEMY_VISIBLE_COLOR_RED\t\t\t\t%.0f\n", SENSE_ENEMY_VISIBLE_COLOR_RED);

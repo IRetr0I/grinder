@@ -1,12 +1,12 @@
 #pragma once
 struct Sense {
     ConfigLoader* cl;
-    MyDisplay* display;
+    XDisplay* display;
     Level* level;
     LocalPlayer* localPlayer;
     std::vector<Player*>* players;
 
-    Sense(ConfigLoader* cl, MyDisplay* display, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* players) {
+    Sense(ConfigLoader* cl, XDisplay* display, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* players) {
         this->cl = cl;
         this->display = display;
         this->level = level;
