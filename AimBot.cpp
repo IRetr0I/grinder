@@ -64,7 +64,7 @@ struct AimBot {
         bool activatedByButtonAndButtonIsDown = cl->AIMBOT_ACTIVATED_BY_BUTTON != "" && display->keyDown(cl->AIMBOT_ACTIVATED_BY_BUTTON);
         bool active = aimbotIsOn
             //&& combatReady
-            && (activatedByAttackingAndIsAttacking
+            //&& (activatedByAttackingAndIsAttacking
                 || activatedByADSAndIsADSing
                 || activatedByButtonAndButtonIsDown);
         return active;
